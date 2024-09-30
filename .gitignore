@@ -1,0 +1,8 @@
+autom4te.cache/
+config.log
+config.status
+configure~
+*.o
+*.so
+*.swp
+src/Makevars
