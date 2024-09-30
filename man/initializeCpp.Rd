@@ -5,12 +5,15 @@
 \alias{initializeCpp,TileDBArraySeed-method}
 \title{Initialize TileDB-backed matrices}
 \usage{
-\S4method{initializeCpp}{TileDBArraySeed}(x, ...)
+\S4method{initializeCpp}{TileDBArraySeed}(x, ..., memorize = FALSE)
 }
 \arguments{
 \item{x}{A \pkg{TileDBArray} seed object.}
 
 \item{...}{Further arguments, ignored.}
+
+\item{memorize}{Logical scalar specifying whether to load the matrix data in \code{x} into memory, if it has not already been loaded.
+See \code{\link{checkMemoryCache}} for details.}
 }
 \value{
 An external pointer that can be used in any \pkg{tatami}-compatible function.

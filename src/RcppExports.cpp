@@ -34,10 +34,38 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// load_dense
+SEXP load_dense(std::string uri, std::string attribute, int cache_size, int num_threads);
+RcppExport SEXP _beachmat_tiledb_load_dense(SEXP uriSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP, SEXP num_threadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type uri(uriSEXP);
+    Rcpp::traits::input_parameter< std::string >::type attribute(attributeSEXP);
+    Rcpp::traits::input_parameter< int >::type cache_size(cache_sizeSEXP);
+    Rcpp::traits::input_parameter< int >::type num_threads(num_threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(load_dense(uri, attribute, cache_size, num_threads));
+    return rcpp_result_gen;
+END_RCPP
+}
+// load_sparse
+SEXP load_sparse(std::string uri, std::string attribute, int cache_size, int num_threads);
+RcppExport SEXP _beachmat_tiledb_load_sparse(SEXP uriSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP, SEXP num_threadsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::traits::input_parameter< std::string >::type uri(uriSEXP);
+    Rcpp::traits::input_parameter< std::string >::type attribute(attributeSEXP);
+    Rcpp::traits::input_parameter< int >::type cache_size(cache_sizeSEXP);
+    Rcpp::traits::input_parameter< int >::type num_threads(num_threadsSEXP);
+    rcpp_result_gen = Rcpp::wrap(load_sparse(uri, attribute, cache_size, num_threads));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_beachmat_tiledb_initialize_from_tiledb_sparse", (DL_FUNC) &_beachmat_tiledb_initialize_from_tiledb_sparse, 3},
     {"_beachmat_tiledb_initialize_from_tiledb_dense", (DL_FUNC) &_beachmat_tiledb_initialize_from_tiledb_dense, 3},
+    {"_beachmat_tiledb_load_dense", (DL_FUNC) &_beachmat_tiledb_load_dense, 4},
+    {"_beachmat_tiledb_load_sparse", (DL_FUNC) &_beachmat_tiledb_load_sparse, 4},
     {NULL, NULL, 0}
 };
 

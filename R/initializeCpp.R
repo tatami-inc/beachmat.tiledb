@@ -4,6 +4,8 @@
 #'
 #' @param x A \pkg{TileDBArray} seed object.
 #' @param ... Further arguments, ignored.
+#' @param memorize Logical scalar specifying whether to load the matrix data in \code{x} into memory, if it has not already been loaded.
+#' See \code{\link{checkMemoryCache}} for details.
 #'
 #' @return An external pointer that can be used in any \pkg{tatami}-compatible function.
 #'
@@ -18,18 +20,18 @@
 NULL
 
 #' @export
-#' @import methods
-#' @import tiledb
 #' @rdname initializeCpp
 #' @importFrom TileDBArray TileDBArraySeed
-#' @importFrom beachmat initializeCpp
-#' @importFrom Rcpp sourceCpp
-#' @useDynLib beachmat.tiledb
+#' @importFrom beachmat initializeCpp checkMemoryCache
 #' @importFrom DelayedArray getAutoBlockSize
-setMethod("initializeCpp", "TileDBArraySeed", function(x, ...) {
-    if (x@sparse) {
-        initialize_from_tiledb_sparse(x@path, x@attr, cache_size=getAutoBlockSize())
+setMethod("initializeCpp", "TileDBArraySeed", function(x, ..., memorize=FALSE) {
+    if (memorize) {
+        checkMemoryCache("beachmat.tiledb", paste(x@path, x@attr, sep=":"), function() loadIntoMemory(x))
     } else {
-        initialize_from_tiledb_dense(x@path, x@attr, cache_size=getAutoBlockSize())
+        if (x@sparse) {
+            initialize_from_tiledb_sparse(x@path, x@attr, cache_size=getAutoBlockSize())
+        } else {
+            initialize_from_tiledb_dense(x@path, x@attr, cache_size=getAutoBlockSize())
+        }
     }
 })

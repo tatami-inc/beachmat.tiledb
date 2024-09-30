@@ -9,3 +9,11 @@ initialize_from_tiledb_dense <- function(file, attribute, cache_size) {
     .Call('_beachmat_tiledb_initialize_from_tiledb_dense', PACKAGE = 'beachmat.tiledb', file, attribute, cache_size)
 }
 
+load_dense <- function(uri, attribute, cache_size, num_threads) {
+    .Call('_beachmat_tiledb_load_dense', PACKAGE = 'beachmat.tiledb', uri, attribute, cache_size, num_threads)
+}
+
+load_sparse <- function(uri, attribute, cache_size, num_threads) {
+    .Call('_beachmat_tiledb_load_sparse', PACKAGE = 'beachmat.tiledb', uri, attribute, cache_size, num_threads)
+}
+
