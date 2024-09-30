@@ -5,4 +5,5 @@ configure~
 *.o
 *.so
 *.swp
+*.html
 src/Makevars

@@ -1,0 +1,54 @@
+---
+title: "Using TileDB-backed matrices with beachmat"
+author: "Aaron Lun"
+package: beachmat.tiledb
+output: 
+  BiocStyle::html_document:
+    toc_float: yes
+vignette: >
+  %\VignetteIndexEntry{User guide}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}  
+---
+
+```{r, echo=FALSE, results="hide", message=FALSE}
+require(knitr)
+opts_chunk$set(error=FALSE, message=FALSE, warning=FALSE)
+```
+
+# Overview 
+
+`r Biocpkg("beachmat.tiledb")` provides a C++ API to extract numeric data from TileDB-backed matrices from the `r Biocpkg("TileDBArray")` package.
+This extends the `r Biocpkg("beachmat")` package to the matrix representations in the [**tatami_tiledb**](https://github.com/tatami-inc/tatami_tiledb) library.
+By including this package, users and developers can enable **tatami**-compatible C++ code to operate natively on file-backed data via the TileDB C library.
+
+# For users 
+
+Users can simply load the package in their R session:
+
+```{r}
+library(beachmat.tiledb)
+```
+
+This will automatically extend `r Biocpkg("beachmat")`'s functionality to `r Biocpkg("TileDBArray")` matrices.
+Any package code based on `r Biocpkg("beachmat")` will now be able to access TileDB data natively without any further work.
+
+# For developers
+
+Developers should read the `r Biocpkg("beachmat")` developer guide if they have not done so already.
+
+Developers can import `r Biocpkg("beachmat.tiledb")` in their packages to guarantee native support for `r Biocpkg("TileDBArray")` classes.
+This registers more `initializeCpp()` methods that initializes the appropriate C++ representations for these classes.
+Of course, this adds some more dependencies to the package, which may or may not be acceptable;
+some developers may prefer to leave this choice to the user or hide it behind an optional parameter to reduce the installation burden 
+(e.g., if TileDB-backed matrices are not expected to be a common input in the package workflow).
+
+It's worth noting that `r Biocpkg("beachmat")` by itself will already work with `TileDBMatrix` objects even without loading `r Biocpkg("beachmat.tiledb")`.
+However, this is not as efficient as any package C++ code needs to go back into R to extract the matrix data via `DelayedArray::extract_array()` and friends.
+Importing `r Biocpkg("beachmat.tiledb")` provides native support without the need for calls to R functions.
+
+# Session information {-}
+
+```{r}
+sessionInfo()
+```
