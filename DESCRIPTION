@@ -19,7 +19,7 @@ Suggests:
     BiocStyle,
     knitr,
     rmarkdown,
-    tiledb
+    Matrix
 LinkingTo: 
     Rcpp, 
     assorthead,

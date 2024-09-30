@@ -19,6 +19,7 @@ NULL
 
 #' @export
 #' @import methods
+#' @import tiledb
 #' @rdname initializeCpp
 #' @importFrom TileDBArray TileDBArraySeed
 #' @importFrom beachmat initializeCpp

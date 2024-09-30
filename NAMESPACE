@@ -2,6 +2,7 @@
 
 exportMethods(initializeCpp)
 import(methods)
+import(tiledb)
 importFrom(DelayedArray,getAutoBlockSize)
 importFrom(Rcpp,sourceCpp)
 importFrom(TileDBArray,TileDBArraySeed)
