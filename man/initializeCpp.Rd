@@ -5,15 +5,28 @@
 \alias{initializeCpp,TileDBArraySeed-method}
 \title{Initialize TileDB-backed matrices}
 \usage{
-\S4method{initializeCpp}{TileDBArraySeed}(x, ..., memorize = FALSE)
+\S4method{initializeCpp}{TileDBArraySeed}(
+  x,
+  tiledb.cache.size = getAutoBlockSize(),
+  tiledb.realize = initializeOptions("realize"),
+  tiledb.realize.num.threads = initializeOptions("realize.num.threads"),
+  tiledb.concurrency.level = initializeOptions("concurrency.level"),
+  ...
+)
 }
 \arguments{
 \item{x}{A \pkg{TileDBArray} seed object.}
 
-\item{...}{Further arguments, ignored.}
+\item{tiledb.cache.size}{Integer scalar specifying the size of the cache in bytes during data extraction from a TileDB matrix.
+Larger values reduce disk I/O during random access to the matrix, at the cost of increased memory usage.}
 
-\item{memorize}{Logical scalar specifying whether to load the matrix data in \code{x} into memory, if it has not already been loaded.
-See \code{\link[beachmat]{checkMemoryCache}} for details.}
+\item{tiledb.realize}{See the \code{realize} option in \code{\link{initializeOptions}}.}
+
+\item{tiledb.realize.num.threads}{See the \code{realize.num.threads} option in \code{\link{initializeOptions}}.}
+
+\item{tiledb.concurrency.level}{See the \code{concurrency.level} option in \code{\link{initializeOptions}}.}
+
+\item{...}{Further arguments, ignored.}
 }
 \value{
 An external pointer that can be used in any \pkg{tatami}-compatible function.

@@ -14,10 +14,15 @@ test_that("initialization works correctly for dense TileDB arrays", {
 
     expect_identical(beachmat::tatami.row.sums(ptr, 2), rowSums(y))
     expect_identical(beachmat::tatami.column.sums(ptr, 2), colSums(y))
+
+    # Trying some other options. 
+    cptr <- initializeCpp(z, tiledb.concurrency.level=2)
+    expect_identical(beachmat::tatami.row.sums(cptr, 2), rowSums(y))
+    expect_identical(beachmat::tatami.column.sums(cptr, 2), colSums(y))
 })
 
 test_that("initialization works correctly with dense memorization", {
-    ptr <- initializeCpp(z, memorize=TRUE)
+    ptr <- initializeCpp(z, tiledb.realize=TRUE)
     expect_false(beachmat::tatami.is.sparse(ptr))
 
     expect_identical(beachmat::tatami.dim(ptr), dim(y))
@@ -42,10 +47,15 @@ test_that("initialization works correctly for sparse TileDB arrays", {
 
     expect_identical(beachmat:::tatami.row.sums(ptr, 2), Matrix::rowSums(sy))
     expect_identical(beachmat:::tatami.column.sums(ptr, 2), Matrix::colSums(sy))
+
+    # Trying some other options. 
+    cptr <- initializeCpp(sz, tiledb.concurrency.level=2)
+    expect_identical(beachmat::tatami.row.sums(cptr, 2), Matrix::rowSums(sy))
+    expect_identical(beachmat::tatami.column.sums(cptr, 2), Matrix::colSums(sy))
 })
 
 test_that("initialization works correctly with sparse memorization", {
-    ptr <- initializeCpp(sz, memorize=TRUE)
+    ptr <- initializeCpp(sz, tiledb.realize=TRUE)
     expect_true(beachmat::tatami.is.sparse(ptr))
 
     expect_identical(beachmat:::tatami.dim(ptr), dim(sy))

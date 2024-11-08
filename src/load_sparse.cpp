@@ -23,7 +23,7 @@ std::shared_ptr<tatami::Matrix<double, int> > create_sparse(const tatami::Matrix
 }
 
 //[[Rcpp::export(rng=false)]]
-SEXP load_sparse(std::string uri, std::string attribute, int cache_size, int num_threads) {
+SEXP load_sparse(std::string uri, std::string attribute, int cache_size, int num_threads, int concurrency_level) {
     tiledb::Context ctx;
     tiledb::Array arr(ctx, uri, TILEDB_READ);
     auto schema = arr.schema();
@@ -32,7 +32,13 @@ SEXP load_sparse(std::string uri, std::string attribute, int cache_size, int num
 
     tatami_tiledb::SparseMatrixOptions opt;
     opt.maximum_cache_size = cache_size;
-    tatami_tiledb::SparseMatrix<double, int> source(uri, std::move(attribute), opt);
+
+    tiledb::Config config;
+    if (concurrency_level > 0) {
+        config["sm.compute_concurrency_level"] = concurrency_level;
+    }
+
+    tatami_tiledb::SparseMatrix<double, int> source(uri, std::move(attribute), tiledb::Context(config), opt);
 
     auto output = Rtatami::new_BoundNumericMatrix();
     int non_target_dim = (source.prefer_rows() ? source.ncol() : source.nrow());

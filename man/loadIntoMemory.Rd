@@ -4,12 +4,21 @@
 \alias{loadIntoMemory}
 \title{Load a TileDB matrix into memory}
 \usage{
-loadIntoMemory(x, num.threads = 1)
+loadIntoMemory(
+  x,
+  cache.size = getAutoBlockSize(),
+  num.threads = 1,
+  concurrency.level = initializeOptions("concurrency.level")
+)
 }
 \arguments{
 \item{x}{A \pkg{TileDBArray}-derived matrix or seed object.}
 
+\item{cache.size}{Integer scalar specifying the size of the cache in bytes during data extraction from a TileDB matrix.}
+
 \item{num.threads}{Integer scalar specifying the number of threads to use for loading.}
+
+\item{concurrency.level}{See the \code{concurrency.level} option in \code{\link{initializeOptions}}.}
 }
 \value{
 An external pointer that can be used in \pkg{tatami}-based functions.

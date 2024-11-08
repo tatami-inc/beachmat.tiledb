@@ -11,61 +11,65 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // initialize_from_tiledb_sparse
-SEXP initialize_from_tiledb_sparse(std::string file, std::string attribute, int cache_size);
-RcppExport SEXP _beachmat_tiledb_initialize_from_tiledb_sparse(SEXP fileSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP) {
+SEXP initialize_from_tiledb_sparse(std::string file, std::string attribute, int cache_size, int concurrency_level);
+RcppExport SEXP _beachmat_tiledb_initialize_from_tiledb_sparse(SEXP fileSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP, SEXP concurrency_levelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< std::string >::type file(fileSEXP);
     Rcpp::traits::input_parameter< std::string >::type attribute(attributeSEXP);
     Rcpp::traits::input_parameter< int >::type cache_size(cache_sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(initialize_from_tiledb_sparse(file, attribute, cache_size));
+    Rcpp::traits::input_parameter< int >::type concurrency_level(concurrency_levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(initialize_from_tiledb_sparse(file, attribute, cache_size, concurrency_level));
     return rcpp_result_gen;
 END_RCPP
 }
 // initialize_from_tiledb_dense
-SEXP initialize_from_tiledb_dense(std::string file, std::string attribute, int cache_size);
-RcppExport SEXP _beachmat_tiledb_initialize_from_tiledb_dense(SEXP fileSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP) {
+SEXP initialize_from_tiledb_dense(std::string file, std::string attribute, int cache_size, int concurrency_level);
+RcppExport SEXP _beachmat_tiledb_initialize_from_tiledb_dense(SEXP fileSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP, SEXP concurrency_levelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< std::string >::type file(fileSEXP);
     Rcpp::traits::input_parameter< std::string >::type attribute(attributeSEXP);
     Rcpp::traits::input_parameter< int >::type cache_size(cache_sizeSEXP);
-    rcpp_result_gen = Rcpp::wrap(initialize_from_tiledb_dense(file, attribute, cache_size));
+    Rcpp::traits::input_parameter< int >::type concurrency_level(concurrency_levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(initialize_from_tiledb_dense(file, attribute, cache_size, concurrency_level));
     return rcpp_result_gen;
 END_RCPP
 }
 // load_dense
-SEXP load_dense(std::string uri, std::string attribute, int cache_size, int num_threads);
-RcppExport SEXP _beachmat_tiledb_load_dense(SEXP uriSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP, SEXP num_threadsSEXP) {
+SEXP load_dense(std::string uri, std::string attribute, int cache_size, int num_threads, int concurrency_level);
+RcppExport SEXP _beachmat_tiledb_load_dense(SEXP uriSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP, SEXP num_threadsSEXP, SEXP concurrency_levelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< std::string >::type uri(uriSEXP);
     Rcpp::traits::input_parameter< std::string >::type attribute(attributeSEXP);
     Rcpp::traits::input_parameter< int >::type cache_size(cache_sizeSEXP);
     Rcpp::traits::input_parameter< int >::type num_threads(num_threadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(load_dense(uri, attribute, cache_size, num_threads));
+    Rcpp::traits::input_parameter< int >::type concurrency_level(concurrency_levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(load_dense(uri, attribute, cache_size, num_threads, concurrency_level));
     return rcpp_result_gen;
 END_RCPP
 }
 // load_sparse
-SEXP load_sparse(std::string uri, std::string attribute, int cache_size, int num_threads);
-RcppExport SEXP _beachmat_tiledb_load_sparse(SEXP uriSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP, SEXP num_threadsSEXP) {
+SEXP load_sparse(std::string uri, std::string attribute, int cache_size, int num_threads, int concurrency_level);
+RcppExport SEXP _beachmat_tiledb_load_sparse(SEXP uriSEXP, SEXP attributeSEXP, SEXP cache_sizeSEXP, SEXP num_threadsSEXP, SEXP concurrency_levelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::traits::input_parameter< std::string >::type uri(uriSEXP);
     Rcpp::traits::input_parameter< std::string >::type attribute(attributeSEXP);
     Rcpp::traits::input_parameter< int >::type cache_size(cache_sizeSEXP);
     Rcpp::traits::input_parameter< int >::type num_threads(num_threadsSEXP);
-    rcpp_result_gen = Rcpp::wrap(load_sparse(uri, attribute, cache_size, num_threads));
+    Rcpp::traits::input_parameter< int >::type concurrency_level(concurrency_levelSEXP);
+    rcpp_result_gen = Rcpp::wrap(load_sparse(uri, attribute, cache_size, num_threads, concurrency_level));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_beachmat_tiledb_initialize_from_tiledb_sparse", (DL_FUNC) &_beachmat_tiledb_initialize_from_tiledb_sparse, 3},
-    {"_beachmat_tiledb_initialize_from_tiledb_dense", (DL_FUNC) &_beachmat_tiledb_initialize_from_tiledb_dense, 3},
-    {"_beachmat_tiledb_load_dense", (DL_FUNC) &_beachmat_tiledb_load_dense, 4},
-    {"_beachmat_tiledb_load_sparse", (DL_FUNC) &_beachmat_tiledb_load_sparse, 4},
+    {"_beachmat_tiledb_initialize_from_tiledb_sparse", (DL_FUNC) &_beachmat_tiledb_initialize_from_tiledb_sparse, 4},
+    {"_beachmat_tiledb_initialize_from_tiledb_dense", (DL_FUNC) &_beachmat_tiledb_initialize_from_tiledb_dense, 4},
+    {"_beachmat_tiledb_load_dense", (DL_FUNC) &_beachmat_tiledb_load_dense, 5},
+    {"_beachmat_tiledb_load_sparse", (DL_FUNC) &_beachmat_tiledb_load_sparse, 5},
     {NULL, NULL, 0}
 };
 

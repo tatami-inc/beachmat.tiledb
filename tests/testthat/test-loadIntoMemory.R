@@ -14,6 +14,11 @@ test_that("memory loading works correctly for dense arrays", {
         expect_identical(beachmat::tatami.dim(ptr), dim(y))
         expect_identical(beachmat::tatami.row(ptr, 1), y[1,])
         expect_identical(beachmat::tatami.column(ptr, 2), y[,2])
+
+        # Trying some of the options.
+        xptr <- loadIntoMemory(z, num.threads=2, concurrency.level=1)
+        expect_identical(beachmat::tatami.row.sums(xptr, 1), Matrix::rowSums(y))
+        expect_identical(beachmat::tatami.column.sums(xptr, 1), Matrix::colSums(y))
     }
 })
 
@@ -32,6 +37,11 @@ test_that("memory loading works correctly for sparse arrays", {
             expect_identical(beachmat:::tatami.dim(ptr), dim(sy))
             expect_identical(beachmat:::tatami.row(ptr, 1), sy[1,])
             expect_identical(beachmat:::tatami.column(ptr, 2), sy[,2])
+
+            # Trying some of the options.
+            xptr <- loadIntoMemory(sz, num.threads=2, concurrency.level=1)
+            expect_identical(beachmat::tatami.row.sums(xptr, 1), Matrix::rowSums(sy))
+            expect_identical(beachmat::tatami.column.sums(xptr, 1), Matrix::colSums(sy))
         }
     }
 })
