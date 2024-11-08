@@ -13,7 +13,7 @@
 \item{...}{Further arguments, ignored.}
 
 \item{memorize}{Logical scalar specifying whether to load the matrix data in \code{x} into memory, if it has not already been loaded.
-See \code{\link{checkMemoryCache}} for details.}
+See \code{\link[beachmat]{checkMemoryCache}} for details.}
 }
 \value{
 An external pointer that can be used in any \pkg{tatami}-compatible function.
