@@ -25,10 +25,11 @@ The following options are supported:
 \item \code{realize}, a logical scalar specifying whether to load the matrix data from TileDB into memory with \code{\link{loadIntoMemory}},
 and then cache it for future calls with \code{\link[beachmat]{checkMemoryCache}}. 
 This avoids time-consuming disk I/O when performing multiple passes through the matrix, at the expense of increased memory usage.
-\item \code{realize.num.threads}, an integer scalar specifying the number of threads to use for \code{\link{loadIntoMemory}}.
+\item \code{realize.num.threads}, an integer scalar specifying the number of threads that can be used by \code{\link{loadIntoMemory}} outside of TileDB calls.
 This is only relevant when \code{realize=TRUE}.
-\item \code{concurrency.level}, an integer scalar specifying the number of threads to use within all calls to the TileDB library.
-Alternatively \code{NULL}, in which case TileDB's defaults are used.
+\item \code{concurrency.level}, an integer scalar specifying the number of threads that can be used by the TileDB library.
+Alternatively \code{NULL}, in which case TileDB's default (i.e., all available cores on the machine) are used.
+Greater performance may be achieved when the product of \code{realize.num.threads} and \code{realize.concurrency.level} does not exceed the number of available cores.
 }
 }
 \examples{

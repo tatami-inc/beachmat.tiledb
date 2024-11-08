@@ -5,8 +5,9 @@
 #'
 #' @param x A \pkg{TileDBArray}-derived matrix or seed object.
 #' @param cache.size Integer scalar specifying the size of the cache in bytes during data extraction from a TileDB matrix.
-#' @param concurrency.level See the \code{concurrency.level} option in \code{\link{initializeOptions}}.
-#' @param num.threads Integer scalar specifying the number of threads to use for loading.
+#' @param num.threads Integer scalar specifying the number of threads to use outside of the TileDB library.
+#' @param concurrency.level Integer scalar specifying the number of threads that can be used by the TileDB library.
+#' See the option of the same name in \code{\link{initializeOptions}} for details.
 #' 
 #' @return An external pointer that can be used in \pkg{tatami}-based functions.
 #'
@@ -21,7 +22,7 @@
 #' @import methods
 #' @importFrom TileDBArray TileDBArraySeed
 #' @importFrom DelayedArray getAutoBlockSize
-loadIntoMemory <- function(x, cache.size=getAutoBlockSize(), num.threads=1, concurrency.level=initializeOptions("concurrency.level")) {
+loadIntoMemory <- function(x, cache.size=getAutoBlockSize(), num.threads=1, concurrency.level=NULL) {
     if (is(x, "DelayedArray")) {
         x <- x@seed
     }
