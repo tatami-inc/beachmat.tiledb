@@ -29,7 +29,7 @@ This avoids time-consuming disk I/O when performing multiple passes through the 
 This is only relevant when \code{realize=TRUE}.
 \item \code{concurrency.level}, an integer scalar specifying the number of threads that can be used by the TileDB library.
 Alternatively \code{NULL}, in which case TileDB's default (i.e., all available cores on the machine) are used.
-Greater performance may be achieved when the product of \code{realize.num.threads} and \code{realize.concurrency.level} does not exceed the number of available cores.
+Greater performance may be achieved when the product of \code{realize.num.threads} and \code{concurrency.level} does not exceed the number of available cores.
 }
 }
 \examples{
