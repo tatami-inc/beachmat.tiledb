@@ -8,7 +8,7 @@ loadIntoMemory(
   x,
   cache.size = getAutoBlockSize(),
   num.threads = 1,
-  concurrency.level = initializeOptions("concurrency.level")
+  concurrency.level = NULL
 )
 }
 \arguments{
@@ -16,9 +16,10 @@ loadIntoMemory(
 
 \item{cache.size}{Integer scalar specifying the size of the cache in bytes during data extraction from a TileDB matrix.}
 
-\item{num.threads}{Integer scalar specifying the number of threads to use for loading.}
+\item{num.threads}{Integer scalar specifying the number of threads to use outside of the TileDB library.}
 
-\item{concurrency.level}{See the \code{concurrency.level} option in \code{\link{initializeOptions}}.}
+\item{concurrency.level}{Integer scalar specifying the number of threads that can be used by the TileDB library.
+See the option of the same name in \code{\link{initializeOptions}} for details.}
 }
 \value{
 An external pointer that can be used in \pkg{tatami}-based functions.
