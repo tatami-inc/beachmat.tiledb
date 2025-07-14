@@ -9,14 +9,14 @@ std::shared_ptr<tatami::Matrix<double, int> > create_sparse(const tatami::Matrix
     std::shared_ptr<tatami::Matrix<double, int> > output;
 
     switch (attr_type) {
-        case TILEDB_UINT8:   output = tatami::convert_to_compressed_sparse<double, int, uint8_t , StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
-        case TILEDB_INT8:    output = tatami::convert_to_compressed_sparse<double, int, int8_t  , StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
-        case TILEDB_UINT16:  output = tatami::convert_to_compressed_sparse<double, int, uint16_t, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
-        case TILEDB_INT16:   output = tatami::convert_to_compressed_sparse<double, int, int16_t , StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
-        case TILEDB_UINT32:  output = tatami::convert_to_compressed_sparse<double, int, uint32_t, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
-        case TILEDB_INT32:   output = tatami::convert_to_compressed_sparse<double, int, int32_t , StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
-        case TILEDB_FLOAT32: output = tatami::convert_to_compressed_sparse<double, int, float   , StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
-        default:             output = tatami::convert_to_compressed_sparse<double, int, double  , StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
+        case TILEDB_UINT8:   output = tatami::convert_to_compressed_sparse<double, int,  std::uint8_t, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
+        case TILEDB_INT8:    output = tatami::convert_to_compressed_sparse<double, int,   std::int8_t, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
+        case TILEDB_UINT16:  output = tatami::convert_to_compressed_sparse<double, int, std::uint16_t, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
+        case TILEDB_INT16:   output = tatami::convert_to_compressed_sparse<double, int,  std::int16_t, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
+        case TILEDB_UINT32:  output = tatami::convert_to_compressed_sparse<double, int, std::uint32_t, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
+        case TILEDB_INT32:   output = tatami::convert_to_compressed_sparse<double, int,  std::int32_t, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
+        case TILEDB_FLOAT32: output = tatami::convert_to_compressed_sparse<double, int,         float, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
+        default:             output = tatami::convert_to_compressed_sparse<double, int,        double, StoredIndex_>(&source, source.prefer_rows(), /* two_pass = */ true, num_threads); break;
     }
 
     return output;
@@ -43,7 +43,7 @@ SEXP load_sparse(std::string uri, std::string attribute, int cache_size, int num
     auto output = Rtatami::new_BoundNumericMatrix();
     int non_target_dim = (source.prefer_rows() ? source.ncol() : source.nrow());
     if (non_target_dim <= 65535) {
-        output->ptr = create_sparse<uint16_t>(source, attr_type, num_threads);
+        output->ptr = create_sparse<std::uint16_t>(source, attr_type, num_threads);
     } else {
         output->ptr = create_sparse<int>(source, attr_type, num_threads);
     }

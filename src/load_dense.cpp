@@ -26,14 +26,14 @@ SEXP load_dense(std::string uri, std::string attribute, int cache_size, int num_
     // tatami_chunked use actual Matrix objects in their internal structure.
     auto output = Rtatami::new_BoundNumericMatrix();
     switch (attr_type) {
-        case TILEDB_UINT8:   output->ptr = tatami::convert_to_dense<double, int, uint8_t >(&source, source.prefer_rows(), num_threads); break;
-        case TILEDB_INT8:    output->ptr = tatami::convert_to_dense<double, int, int8_t  >(&source, source.prefer_rows(), num_threads); break;
-        case TILEDB_UINT16:  output->ptr = tatami::convert_to_dense<double, int, uint16_t>(&source, source.prefer_rows(), num_threads); break;
-        case TILEDB_INT16:   output->ptr = tatami::convert_to_dense<double, int, int16_t >(&source, source.prefer_rows(), num_threads); break;
-        case TILEDB_UINT32:  output->ptr = tatami::convert_to_dense<double, int, uint32_t>(&source, source.prefer_rows(), num_threads); break;
-        case TILEDB_INT32:   output->ptr = tatami::convert_to_dense<double, int, int32_t >(&source, source.prefer_rows(), num_threads); break;
-        case TILEDB_FLOAT32: output->ptr = tatami::convert_to_dense<double, int, float   >(&source, source.prefer_rows(), num_threads); break;
-        default:             output->ptr = tatami::convert_to_dense<double, int, double  >(&source, source.prefer_rows(), num_threads); break;
+        case TILEDB_UINT8:   output->ptr = tatami::convert_to_dense<double, int,  std::uint8_t>(&source, source.prefer_rows(), num_threads); break;
+        case TILEDB_INT8:    output->ptr = tatami::convert_to_dense<double, int,   std::int8_t>(&source, source.prefer_rows(), num_threads); break;
+        case TILEDB_UINT16:  output->ptr = tatami::convert_to_dense<double, int, std::uint16_t>(&source, source.prefer_rows(), num_threads); break;
+        case TILEDB_INT16:   output->ptr = tatami::convert_to_dense<double, int,  std::int16_t>(&source, source.prefer_rows(), num_threads); break;
+        case TILEDB_UINT32:  output->ptr = tatami::convert_to_dense<double, int, std::uint32_t>(&source, source.prefer_rows(), num_threads); break;
+        case TILEDB_INT32:   output->ptr = tatami::convert_to_dense<double, int,  std::int32_t>(&source, source.prefer_rows(), num_threads); break;
+        case TILEDB_FLOAT32: output->ptr = tatami::convert_to_dense<double, int,         float>(&source, source.prefer_rows(), num_threads); break;
+        default:             output->ptr = tatami::convert_to_dense<double, int,        double>(&source, source.prefer_rows(), num_threads); break;
     }
 
     return output;
